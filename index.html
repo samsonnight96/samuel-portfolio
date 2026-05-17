@@ -6,7 +6,956 @@
   <title>Samuel Ferla — Regista e Sceneggiatore</title><!DOCTYPE html>
 <html lang="it">
 <head>
+  <meta charset="UTF-8"/><!DOCTYPE html>
+<html lang="it">
+<head>
   <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Samuel Ferla — Regista e Sceneggiatore</title>
+  <meta name="description" content="Portfolio di Samuel Ferla, Regista e Sceneggiatore. Roma."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #080808;
+      --dark: #111111;
+      --card: #141414;
+      --amber: #c9a84c;
+      --amber-dim: #9a7c38;
+      --white: #f0ece4;
+      --muted: rgba(240,236,228,0.45);
+      --faint: rgba(240,236,228,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--faint);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--amber); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 22px; height: 1px; background: var(--white); transition: all 0.3s; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 48px 80px;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,168,76,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(56px, 10vw, 110px);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 52px;
+    }
+    .hero-line {
+      width: 1px;
+      height: 48px;
+      background: var(--amber);
+      margin: 0 auto 52px;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .btn-outline {
+      border: 1px solid var(--faint);
+      color: var(--muted);
+    }
+    .btn-outline:hover { border-color: var(--amber); color: var(--amber); }
+    .btn-fill {
+      background: var(--amber);
+      color: var(--black);
+      font-weight: 400;
+    }
+    .btn-fill:hover { background: #e0ba5a; }
+
+    /* SECTION BASE */
+    section { padding: 100px 48px; }
+    .section-inner { max-width: 1400px; margin: 0 auto; }
+    .section-label {
+      font-size: 9px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .section-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--amber);
+      margin-bottom: 52px;
+    }
+
+    /* LAVORI PAGE */
+    .page { display: none; padding-top: 80px; min-height: 100vh; }
+    .page.active { display: block; }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--faint);
+      margin-bottom: 56px;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 16px 32px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--white); }
+    .tab-btn.active { color: var(--amber); border-bottom-color: var(--amber); }
+
+    /* GRID */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2px;
+    }
+
+    /* CARD */
+    .project-card {
+      background: var(--card);
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.3s;
+      position: relative;
+    }
+    .project-card:hover { transform: translateY(-3px); }
+    .card-poster {
+      aspect-ratio: 2/3;
+      overflow: hidden;
+      position: relative;
+      background: #1a1a1a;
+    }
+    .card-poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s;
+      display: block;
+    }
+    .project-card:hover .card-poster img { transform: scale(1.05); }
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,8,8,0.85) 0%, transparent 50%);
+    }
+    .card-body { padding: 20px; }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+    .card-year {
+      font-size: 10px;
+      color: var(--amber);
+      letter-spacing: 0.2em;
+      margin-bottom: 6px;
+    }
+    .card-role {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,0.92);
+      overflow-y: auto;
+      padding: 60px 24px;
+    }
+    .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+    .modal {
+      background: var(--dark);
+      max-width: 860px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 0;
+      position: relative;
+      border: 1px solid var(--faint);
+    }
+    .modal-poster {
+      aspect-ratio: 2/3;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+    .modal-poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .modal-content { padding: 40px; }
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 20px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 22px;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--white); }
+    .modal-type {
+      font-size: 9px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 10px;
+    }
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .modal-year {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      margin-bottom: 28px;
+    }
+    .modal-meta { margin-bottom: 28px; }
+    .modal-meta-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+    .modal-meta-label {
+      color: var(--amber);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      min-width: 90px;
+      padding-top: 2px;
+    }
+    .modal-meta-value { color: var(--muted); }
+    .modal-rule { width: 30px; height: 1px; background: var(--faint); margin: 24px 0; }
+    .modal-sinossi-label {
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 10px;
+    }
+    .modal-sinossi {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .modal-link {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--amber);
+      text-decoration: none;
+      border-bottom: 1px solid var(--amber-dim);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+    .modal-link:hover { color: var(--white); }
+
+    /* SCENEGGIATURE */
+    .script-list { list-style: none; }
+    .script-item {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--faint);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .script-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--white);
+    }
+    .script-year {
+      font-size: 10px;
+      color: var(--amber);
+      letter-spacing: 0.15em;
+      white-space: nowrap;
+    }
+    .script-type {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+    .script-awards {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 5px;
+      font-style: italic;
+    }
+
+    /* BIO PAGE */
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 160px 1fr 1fr;
+      gap: 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+      align-items: start;
+    }
+    .bio-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: 1400px;
+    }
+    .bio-text {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+    .bio-data { }
+    .bio-data-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--faint);
+    }
+    .bio-data-label {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 4px;
+    }
+    .bio-data-value { font-size: 13px; color: var(--muted); }
+
+    /* SERVIZI */
+    .servizi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      max-width: 900px;
+      margin-bottom: 60px;
+    }
+    .servizio-card {
+      background: var(--card);
+      padding: 40px;
+    }
+    .servizio-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .servizio-text { font-size: 13px; color: var(--muted); line-height: 1.8; }
+
+    /* CONTATTI */
+    .contatti-block { max-width: 500px; }
+    .contact-email {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--white);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 40px;
+      transition: color 0.2s;
+    }
+    .contact-email:hover { color: var(--amber); }
+    .social-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .social-link {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      border-bottom: 1px solid var(--faint);
+      padding-bottom: 3px;
+    }
+    .social-link:hover { color: var(--amber); border-color: var(--amber); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--faint);
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: 10px; color: var(--white); letter-spacing: 0.15em; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 61px; left: 0; right: 0;
+        background: var(--black);
+        padding: 32px 24px;
+        gap: 24px;
+        border-bottom: 1px solid var(--faint);
+      }
+      section, .page { padding: 60px 20px; }
+      .hero { padding: 100px 20px 60px; }
+      .hero h1 { font-size: 48px; }
+      .projects-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+      .card-body { padding: 12px; }
+      .card-title { font-size: 14px; }
+      .card-year { font-size: 9px; }
+      .modal { grid-template-columns: 1fr; }
+      .modal-poster { aspect-ratio: 16/9; }
+      .modal-content { padding: 24px; }
+      .modal-title { font-size: 22px; }
+      .bio-grid { grid-template-columns: 1fr; gap: 36px; }
+      .bio-two-col { grid-template-columns: 1fr; gap: 36px; }
+      .bio-grid > div:first-child { align-items: center; }
+      .bio-grid > div:first-child img { width: 120px; height: 120px; }
+      .servizi-grid { grid-template-columns: 1fr; }
+      .tabs { overflow-x: auto; }
+      .tab-btn { padding: 14px 20px; white-space: nowrap; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+    @media (max-width: 400px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ANIMATIONS */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeIn 0.6s ease forwards;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in:nth-child(1) { animation-delay: 0.1s; }
+    .fade-in:nth-child(2) { animation-delay: 0.2s; }
+    .fade-in:nth-child(3) { animation-delay: 0.3s; }
+    .fade-in:nth-child(4) { animation-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nav-logo" onclick="showPage('home')">Samuel Ferla</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a>
+    <a href="#" onclick="showPage('lavori')" id="nav-lavori">I Miei Lavori</a>
+    <a href="#" onclick="showPage('bio')" id="nav-bio">Biografia</a>
+    <a href="#" onclick="showPage('contatti')" id="nav-contatti">Contatti</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <p class="hero-eyebrow fade-in">Portfolio</p>
+    <h1 class="fade-in">Samuel Ferla</h1>
+    <p class="hero-sub fade-in">Regista &amp; Sceneggiatore</p>
+    <div class="hero-line fade-in"></div>
+    <div class="hero-cta fade-in">
+      <a href="#" class="btn btn-outline" onclick="showPage('lavori')">I Miei Lavori</a>
+      <a href="#" class="btn btn-fill" onclick="showPage('contatti')">Contattami</a>
+    </div>
+  </section>
+  <section style="padding-top:0; padding-bottom:100px; display:flex; flex-direction:column; align-items:center; gap:32px;">
+    <img src="images/logo.png" alt="Logo Samuel Ferla" style="width:64px;height:64px;object-fit:contain;opacity:0.7;">
+    <div style="display:flex;gap:32px;flex-wrap:wrap;justify-content:center;">
+      <a href="https://filmfreeway.com/SamuelFerla" target="_blank" class="social-link">FilmFreeway</a>
+      <a href="https://www.instagram.com/samuelferla/" target="_blank" class="social-link">Instagram</a>
+      <a href="https://www.linkedin.com/in/samuelferla/" target="_blank" class="social-link">LinkedIn</a>
+    </div>
+  </section>
+</div>
+
+<!-- LAVORI -->
+<div id="page-lavori" class="page">
+  <section>
+    <div class="section-inner">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:12px;">
+      <div>
+        <p class="section-label">Filmografia</p>
+        <h2 class="section-title">I Miei Lavori</h2>
+      </div>
+      <a href="#" onclick="showPage('home')" style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;margin-bottom:8px;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">← Home</a>
+    </div>
+    <div class="section-rule"></div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('produzione', this)">Produzione</button>
+      <button class="tab-btn" onclick="switchTab('sviluppo', this)">In Sviluppo</button>
+      <button class="tab-btn" onclick="switchTab('sceneggiature', this)">Sceneggiature</button>
+    </div>
+    <div id="tab-produzione" class="projects-grid"></div>
+    <div id="tab-sviluppo" class="projects-grid" style="display:none;"></div>
+    <div id="tab-sceneggiature" style="display:none;"></div>
+    </div>
+  </section>
+</div>
+
+<!-- BIO -->
+<div id="page-bio" class="page">
+  <section>
+    <div class="section-inner">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:20px;">
+        <img src="images/samuel.jpg" alt="Samuel Ferla" style="width:68px;height:68px;border-radius:50%;object-fit:cover;object-position:center top;border:1px solid var(--faint);flex-shrink:0;">
+        <div>
+          <p class="section-label" style="margin-bottom:4px;">Chi sono</p>
+          <h2 class="section-title" style="margin-bottom:0;">Biografia</h2>
+        </div>
+      </div>
+      <a href="#" onclick="showPage('home')" style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">← Home</a>
+    </div>
+    <div class="section-rule"></div>
+    <div class="bio-two-col">
+      <div class="bio-text">
+        <p style="color:var(--white);font-size:15px;margin-bottom:16px;">Sono un Regista e Sceneggiatore Freelance.</p>
+        <p>Mi occupo di sceneggiature per cinema, TV e web, e di regia cinematografica. Grazie a una formazione di alto livello, ho maturato una profonda conoscenza nella scrittura creativa, narrativa e drammaturgica. Possiedo ottime competenze di regia e una solida padronanza del linguaggio cinematografico. Inoltre, ho eccellenti conoscenze dei media studies, dei media multimediali e una grande dimestichezza con i software più importanti del settore. Collaboro con produzioni e autori per sviluppare progetti originali e curare ogni fase del processo narrativo e registico.</p>
+        <br>
+        <p><a href="#" onclick="showPage('contatti')" style="color:var(--amber);text-decoration:none;letter-spacing:0.05em;border-bottom:1px solid var(--amber);padding-bottom:1px;">Contattami</a> per collaborazioni e progetti.</p>
+      </div>
+      <div class="bio-data">
+        <div class="bio-data-item">
+          <p class="bio-data-label">Originario di</p>
+          <p class="bio-data-value">Palazzolo Acreide, Siracusa</p>
+        </div>
+        <div class="bio-data-item">
+          <p class="bio-data-label">Nato il</p>
+          <p class="bio-data-value">25/03/1996</p>
+        </div>
+        <div class="bio-data-item">
+          <p class="bio-data-label">Formazione</p>
+          <p class="bio-data-value" style="line-height:1.9;">
+            2020 — Laboratorio <em>I contratti nella produzione cine-televisiva</em>, Centro Sperimentale di Cinematografia<br>
+            2021 — Corso di Scrittura Creativa e Progettazione di Storie, con Marco Carrara<br>
+            2021 — Laurea in Scienze e Tecnologie Multimediali, Università di Udine<br>
+            2022 — Diploma in Regia e Sceneggiatura, Accademia Griffith, Roma
+          </p>
+        </div>
+        <div class="bio-data-item">
+          <p class="bio-data-label">Attività</p>
+          <p class="bio-data-value">Regista · Sceneggiatore · Story Editor · Autore — Roma</p>
+        </div>
+        <div class="bio-data-item" style="border:none;">
+          <p class="bio-data-label">Profili</p>
+          <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
+            <a href="https://filmfreeway.com/SamuelFerla" target="_blank" class="social-link">FilmFreeway</a>
+            <a href="https://www.instagram.com/samuelferla/" target="_blank" class="social-link">Instagram</a>
+            <a href="https://www.linkedin.com/in/samuelferla/" target="_blank" class="social-link">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTATTI -->
+<div id="page-contatti" class="page">
+  <section>
+    <div class="section-inner">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:12px;">
+      <div>
+        <p class="section-label">Lavoriamo insieme</p>
+        <h2 class="section-title">Contatti</h2>
+      </div>
+      <a href="#" onclick="showPage('home')" style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;margin-bottom:8px;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">← Home</a>
+    </div>
+    <div class="section-rule"></div>
+    <div style="text-align:center;max-width:600px;margin:0 auto;padding-top:20px;">
+      <p style="font-size:13px;color:var(--muted);line-height:1.9;margin-bottom:40px;">Lavoro a stretto contatto con la produzione in ogni fase del processo creativo &mdash; dalla creazione del concept, allo sviluppo della sceneggiatura fino alla post-produzione &mdash; con attenzione ai dettagli e alla coerenza del racconto. Sperimento con generi diversi, dal dramma alla commedia, cercando ogni volta la forma pi&ugrave; efficace per dare vita a una storia.</p>
+      <a href="mailto:samuelferla@outlook.it" class="contact-email" style="display:block;text-align:center;">samuelferla@outlook.it</a>
+      <div class="social-links" style="justify-content:center;">
+        <a href="https://filmfreeway.com/SamuelFerla" target="_blank" class="social-link">FilmFreeway</a>
+        <a href="https://www.instagram.com/samuelferla/" target="_blank" class="social-link">Instagram</a>
+        <a href="https://www.linkedin.com/in/samuelferla/" target="_blank" class="social-link">LinkedIn</a>
+      </div>
+    </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Samuel Ferla &nbsp;·&nbsp; P.I. 02156780898</p>
+  <p>© - 2026 Tutti i diritti riservati</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <div class="modal-poster" id="modalPoster"></div>
+    <div class="modal-content">
+      <p class="modal-type" id="modalType"></p>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <p class="modal-year" id="modalYear"></p>
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-rule"></div>
+      <p class="modal-sinossi-label">Sinossi</p>
+      <p class="modal-sinossi" id="modalSinossi"></p>
+      <div id="modalLinks"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// DATA
+const projects = {
+  produzione: [
+    {
+      title: "Primavera",
+      year: "2026",
+      type: "Cortometraggio",
+      role: "Regista e Sceneggiatore",
+      image: "images/primavera.jpg",
+      meta: [
+        { label: "Produzione", value: "Fargo Entertainment" },
+        { label: "Sostegno", value: "Genova Liguria Film Commission · Ministero della Cultura" },
+        { label: "Ruolo", value: "Scritto e diretto da Samuel Ferla" },
+      ],
+      sinossi: "Una giovane ragazza, Rosa, arriva in un piccolo paesino suscitando curiosità e attrazione da parte degli abitanti. Il via vai di persone nella sua abitazione mette in giro cattive voci e disprezzo da parte di alcuni paesani. Riuscirà Rosa a far valere la dignità del suo lavoro oltre le convenzioni sociali?",
+      links: [{ label: "Galleria", url: "galleria-primavera.html" }]
+    },
+    {
+      title: "Juventus — Il Decennio d'Oro",
+      year: "2025",
+      type: "Docufilm",
+      role: "Sceneggiatore",
+      image: "images/juventus.jpg",
+      meta: [
+        { label: "Produzione", value: "LuxVide / Rai Documentari" },
+        { label: "Regia", value: "Angelo Bozzolini" },
+        { label: "Ruolo", value: "Sceneggiatore (con A. Bozzolini e L. Scurati)" },
+        { label: "Distribuzione", value: "Sale cinematografiche, 17 feb 2026 · Rai 1 prima serata, mag 2026" },
+        { label: "Festival", value: "Selezione Ufficiale — Torino Film Festival" },
+      ],
+      sinossi: "Tra il 1975 e il 1985 la Juventus domina in Italia e in Europa, diventando simbolo di eccellenza in un Paese attraversato da tensioni sociali e terrorismo. Dalla rivalità con il Torino FC alla tragedia dell'Heysel, il documentario ripercorre il decennio d'oro bianconero segnato dall'arrivo di Trapattoni e da campioni come Zoff, Scirea, Tardelli, Bettega, Platini e Boniek, intrecciando sport e storia italiana.",
+      links: [{ label: "Torino Film Festival", url: "https://www.torinofilmfest.org/it/scheda-film/61436/" }]
+    },
+    {
+      title: "Cento e Oltre. Puccini e Noi",
+      year: "2025",
+      type: "Docufilm",
+      role: "Collaboratore alla scrittura",
+      image: "images/puccini.png",
+      meta: [
+        { label: "Produzione", value: "AutAut Production / Rai Documentari" },
+        { label: "Regia", value: "Angelo Bozzolini" },
+        { label: "Ruolo", value: "Collaboratore alla scrittura" },
+        { label: "Distribuzione", value: "Prima serata Rai 3, 8 novembre 2025" },
+      ],
+      sinossi: "A cento anni dalla sua morte, Giacomo Puccini rimane una delle figure più popolari e iconiche dell'opera italiana. Il documentario è un focus non convenzionale sulla vita personale e artistica di Puccini, che si rivela un precursore inconsapevole di generi musicali apparentemente lontani dall'opera — dal jazz al rock, dal musical alla musica per film.",
+      links: [{ label: "Disponibile su RaiPlay", url: "https://www.raiplay.it/programmi/centoeoltrepuccinienoi" }]
+    },
+    {
+      title: "Viva Puccini",
+      year: "2025",
+      type: "Programma televisivo",
+      role: "Redazione",
+      image: "images/viva_puccini.jpg",
+      meta: [
+        { label: "Produzione", value: "AutAut Production / Rai" },
+        { label: "Regia", value: "Fabrizio Guttuso Alaimo" },
+        { label: "Ruolo", value: "Redazione" },
+        { label: "Distribuzione", value: "Prima serata Rai 3, 1° gennaio 2025" },
+      ],
+      sinossi: "Una serata evento per celebrare Giacomo Puccini nel centenario della sua scomparsa, con l'esecuzione dell'Orchestra Scarlatti di Napoli diretta dal Maestro Beatrice Venezi e la partecipazione di alcuni dei più importanti cantanti della lirica internazionale.",
+      links: [{ label: "Disponibile su RaiPlay", url: "https://www.raiplay.it/programmi/vivapuccini" }]
+    },
+    {
+      title: "Tennis & Friends",
+      year: "2024",
+      type: "Docufilm",
+      role: "Collaboratore alla scrittura",
+      image: "images/tennis.jpg",
+      meta: [
+        { label: "Produzione", value: "AutAut Production / Rai Documentari" },
+        { label: "Regia", value: "Angelo Bozzolini" },
+        { label: "Ruolo", value: "Collaboratore alla scrittura" },
+        { label: "Distribuzione", value: "Rai, 17 maggio 2024" },
+      ],
+      sinossi: "Fiorello, Mara Venier, Paolo Bonolis e Maria De Filippi raccontano l'esperienza del progetto sociale Tennis & Friends — Salute e Sport, che attraverso lo sport cerca di sensibilizzare sul tema della prevenzione.",
+      links: [{ label: "Disponibile su RaiPlay", url: "https://www.raiplay.it/programmi/tennisandfriends-laprevenzionescendeincampo" }]
+    },
+    {
+      title: "Super G",
+      year: "2022",
+      type: "Cortometraggio",
+      role: "Regista",
+      image: "images/super_g.jpg",
+      meta: [
+        { label: "Produzione", value: "Accademia di Cinema e TV Griffith" },
+        { label: "Regia", value: "Samuel Ferla" },
+        { label: "Sceneggiatura", value: "N. Sorrentino, A. Patacconi, F. Luisiani" },
+        { label: "Con", value: "Filippo Lanuto, Valentina Malaspina" },
+      ],
+      sinossi: "Giulio, un bambino di otto anni appassionato di supereroi, si rende conto che sua madre è in grave pericolo e decide di aiutarla.",
+      links: [{ label: "Guarda su YouTube", url: "https://www.youtube.com/watch?v=gnkwh0DjhVM" }]
+    },
+  ],
+  sviluppo: [
+    {
+      title: "INNESTI",
+      year: "2026",
+      type: "Docu-serie",
+      role: "Ideatore, Regista e Sceneggiatore",
+      image: "images/innesti.png",
+      meta: [
+        { label: "Produzione", value: "Onirika Production" },
+        { label: "Ideata da", value: "Samuel Ferla e Pierpaolo Saraceno" },
+        { label: "Regia", value: "Samuel Ferla e Pierpaolo Saraceno" },
+        { label: "Sceneggiatura", value: "Samuel Ferla" },
+        { label: "Produttore", value: "Pierpaolo Saraceno" },
+        { label: "Fotografia", value: "Tobia Gaspari, Alessandro Baroli, Giacomo Zacchia" },
+        { label: "Montaggio", value: "Luca Fiammengo" },
+        { label: "Stato", value: "Inedita" },
+      ],
+      sinossi: "Una docu-serie inedita che esplora le storie di artisti, artigiani e imprenditori nati all'estero che hanno costruito la propria carriera in Italia.",
+      links: [{ label: "Guarda il trailer", url: "https://www.youtube.com/watch?v=yGgfc9SBmAY" }]
+    },
+    {
+      title: "6-1-5 A Girare",
+      year: "2025",
+      type: "Cortometraggio",
+      role: "Regista e Sceneggiatore",
+      image: "images/615.png",
+      meta: [
+        { label: "Produzione", value: "Indipendente" },
+        { label: "Ruolo", value: "Scritto e diretto da Samuel Ferla" },
+        { label: "Stato", value: "In post-produzione" },
+      ],
+      sinossi: "Totò è un cliente affezionato di una sala scommesse, ma è emarginato e ignorato dagli habitué. Una vincita alle corse con la combinazione '6-1-5 a girare' lo trasforma nel 'Re della sala'. Quando la fortuna svanisce e diventa il 'Gatto nero', Totò farà di tutto per tornare al centro dell'attenzione.",
+      links: []
+    },
+  ]
+};
+
+const sceneggiature = [
+  { title: "Notte Insonne", year: "2025", type: "Cortometraggio", note: "" },
+  { title: "Do Ut Des", year: "2025", type: "Cortometraggio", note: "Con Luca Nicolosi" },
+  { title: "Ortigia Island", year: "2024", type: "Lungometraggio", note: "" },
+  { title: "6-1-5 a Girare", year: "2024", type: "Cortometraggio", note: "" },
+  { title: "Primavera", year: "2024", type: "Cortometraggio", note: "Vincitrice bando FESR Liguria 2021-2027" },
+  { title: "Luce Blu", year: "2023", type: "Cortometraggio", note: "Vincitore Milan Short Film Festival 2024 (Best Short Script) · Finalista Vesuvius IFA 2024 · Vincitore Robinson Film Awards 2023 · Finalista Rome Prisma 2023 · Finalista Theta Short Film Festival 2023" },
+  { title: "Il Puparo", year: "2023", type: "Soggetto di lungometraggio animazione", note: "" },
+  { title: "Autunno", year: "2023", type: "Cortometraggio", note: "" },
+  { title: "Gli Avvoltoi", year: "2023", type: "Soggetto di lungometraggio", note: "Con Francesco Giardiello · Finalista RIFF 2023" },
+  { title: "Whispers", year: "2023", type: "Concept di serie TV", note: "Con Francesco Giardiello" },
+  { title: "Non è una poltrona per vecchi", year: "2022", type: "Cortometraggio", note: "" },
+];
+
+// RENDER
+function renderProjects() {
+  ['produzione', 'sviluppo'].forEach(tab => {
+    const container = document.getElementById('tab-' + tab);
+    container.innerHTML = projects[tab].map((p, i) => `
+      <div class="project-card" onclick="openModal('${tab}', ${i})">
+        <div class="card-poster">
+          <img src="${p.image}" alt="${p.title}" loading="lazy">
+          <div class="card-overlay"></div>
+        </div>
+        <div class="card-body">
+          <p class="card-year">${p.year} · ${p.type}</p>
+          <h3 class="card-title">${p.title}</h3>
+          <p class="card-role">${p.role}</p>
+        </div>
+      </div>
+    `).join('');
+  });
+
+  const scriptContainer = document.getElementById('tab-sceneggiature');
+  scriptContainer.innerHTML = `<ul class="script-list">${sceneggiature.map(s => `
+    <li class="script-item">
+      <div>
+        <p class="script-title">${s.title}</p>
+        <p class="script-type">${s.type}</p>
+        ${s.note ? `<p class="script-awards">${s.note}</p>` : ''}
+      </div>
+      <span class="script-year">${s.year}</span>
+    </li>
+  `).join('')}</ul>`;
+}
+
+// MODAL
+function openModal(tab, index) {
+  const p = projects[tab][index];
+  document.getElementById('modalType').textContent = p.type;
+  document.getElementById('modalTitle').textContent = p.title;
+  document.getElementById('modalYear').textContent = p.year;
+  document.getElementById('modalSinossi').textContent = p.sinossi;
+  document.getElementById('modalPoster').innerHTML = `<img src="${p.image}" alt="${p.title}">`;
+  document.getElementById('modalMeta').innerHTML = p.meta.map(m => `
+    <div class="modal-meta-row">
+      <span class="modal-meta-label">${m.label}</span>
+      <span class="modal-meta-value">${m.value}</span>
+    </div>
+  `).join('');
+  document.getElementById('modalLinks').innerHTML = p.links.map(l => `
+    <a href="${l.url}" target="_blank" class="modal-link">${l.label} →</a>
+  `).join(' &nbsp; ');
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal')) closeModalBtn();
+}
+function closeModalBtn() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalBtn(); });
+
+// TABS
+function switchTab(name, btn) {
+  ['produzione', 'sviluppo', 'sceneggiature'].forEach(t => {
+    const el = document.getElementById('tab-' + t);
+    if (el) el.style.display = 'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).style.display = name === 'sceneggiature' ? 'block' : 'grid';
+  btn.classList.add('active');
+}
+
+// NAVIGATION
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('nav-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+  document.getElementById('navLinks').classList.remove('open');
+}
+
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+renderProjects();
+</script>
+</body>
+</html>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Samuel Ferla — Regista e Sceneggiatore</title>
   <meta name="description" content="Portfolio di Samuel Ferla, Regista e Sceneggiatore. Roma."/>
