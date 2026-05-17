@@ -169,7 +169,6 @@
     /* LAVORI PAGE */
     .page { display: none; padding-top: 80px; min-height: 100vh; }
     .page.active { display: block; }
-    .page:not(.active) { display: none !important; min-height: 0 !important; }
 
     /* TABS */
     .tabs {
@@ -578,10 +577,7 @@
       <a href="https://www.linkedin.com/in/samuelferla/" target="_blank" class="social-link">LinkedIn</a>
     </div>
   </section>
-  <footer>
-    <p>Samuel Ferla &nbsp;·&nbsp; P.I. 02156780898</p>
-    <p>© - 2026 Tutti i diritti riservati</p>
-  </footer>
+
 </div>
 
 <!-- LAVORI -->
@@ -606,10 +602,7 @@
     <div id="tab-sceneggiature" style="display:none;"></div>
     </div>
   </section>
-  <footer>
-    <p>Samuel Ferla &nbsp;·&nbsp; P.I. 02156780898</p>
-    <p>© - 2026 Tutti i diritti riservati</p>
-  </footer>
+
 </div>
 
 <!-- BIO -->
@@ -668,10 +661,7 @@
     </div>
     </div>
   </section>
-  <footer>
-    <p>Samuel Ferla &nbsp;·&nbsp; P.I. 02156780898</p>
-    <p>© - 2026 Tutti i diritti riservati</p>
-  </footer>
+
 </div>
 
 <!-- CONTATTI -->
@@ -697,13 +687,14 @@
     </div>
     </div>
   </section>
-  <footer>
-    <p>Samuel Ferla &nbsp;·&nbsp; P.I. 02156780898</p>
-    <p>© - 2026 Tutti i diritti riservati</p>
-  </footer>
+
 </div>
 
-<!-- FOOTER -->
+<footer>
+  <p>Samuel Ferla &nbsp;·&nbsp; P.I. 02156780898</p>
+  <p>© - 2026 Tutti i diritti riservati</p>
+</footer>
+
 <!-- MODAL -->
 <div class="modal-overlay" id="modal" onclick="closeModal(event)">
   <div class="modal" id="modalBox">
@@ -943,8 +934,13 @@ function switchTab(name, btn) {
 
 // NAVIGATION
 function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active');
+    p.style.display = 'none';
+  });
+  const target = document.getElementById('page-' + name);
+  target.classList.add('active');
+  target.style.display = 'block';
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
   document.getElementById('nav-' + name).classList.add('active');
   window.scrollTo(0, 0);
