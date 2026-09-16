@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Play, Images, Award, Send } from 'lucide-react';
+import { Play, Images, Award, Send, BookOpen } from 'lucide-react';
 import { drawerScriptsData } from '../data/portfolioData';
 import { DrawerScript } from '../types';
 
 interface DrawerProjectsSectionProps {
   onOpenPitchViewer: (scriptId: string) => void;
+  onOpenSynopsis: (scriptId: string) => void;
   onPlayTrailer: (youtubeId: string, title: string) => void;
   onRequestScript: (scriptTitle: string) => void;
   isDarkMode: boolean;
@@ -12,6 +13,7 @@ interface DrawerProjectsSectionProps {
 
 export const DrawerProjectsSection: React.FC<DrawerProjectsSectionProps> = ({
   onOpenPitchViewer,
+  onOpenSynopsis,
   onPlayTrailer,
   onRequestScript,
   isDarkMode
@@ -210,6 +212,14 @@ export const DrawerProjectsSection: React.FC<DrawerProjectsSectionProps> = ({
                         <Images className="w-3 h-3" />
                         <span>Guarda il Pitch!</span>
                       </button>
+                    ) : script.coverImage ? (
+                      <button
+                        onClick={() => onOpenSynopsis(script.id)}
+                        className="bg-[#C81D11] hover:bg-[#A8170D] text-white px-4 py-2 text-[10px] uppercase font-mono tracking-widest flex items-center gap-1.5 transition-all font-bold"
+                      >
+                        <BookOpen className="w-3 h-3" />
+                        <span>Leggi la Sinossi</span>
+                      </button>
                     ) : (
                       <button
                         onClick={() => onRequestScript(script.title)}
@@ -230,6 +240,15 @@ export const DrawerProjectsSection: React.FC<DrawerProjectsSectionProps> = ({
                         className="text-[9px] uppercase tracking-widest font-mono hover:text-[#C81D11] font-bold transition-colors"
                       >
                         Opziona Pitch →
+                      </button>
+                    )}
+
+                    {script.coverImage && (
+                      <button
+                        onClick={() => onRequestScript(script.title)}
+                        className="text-[9px] uppercase tracking-widest font-mono hover:text-[#C81D11] font-bold transition-colors"
+                      >
+                        Richiedi Pitch →
                       </button>
                     )}
                   </div>

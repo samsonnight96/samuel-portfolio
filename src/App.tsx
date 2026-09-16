@@ -8,6 +8,7 @@ import { BioSection } from './components/BioSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { PitchViewerModal } from './components/PitchViewerModal';
+import { SynopsisModal } from './components/SynopsisModal';
 import { ProjectModal } from './components/ProjectModal';
 import { TrailerModal } from './components/TrailerModal';
 import { LightboxModal } from './components/LightboxModal';
@@ -24,6 +25,9 @@ export default function App() {
 
   const [isPitchViewerOpen, setIsPitchViewerOpen] = useState(false);
   const [selectedScript, setSelectedScript] = useState<DrawerScript | null>(null);
+
+  const [isSynopsisModalOpen, setIsSynopsisModalOpen] = useState(false);
+  const [synopsisScript, setSynopsisScript] = useState<DrawerScript | null>(null);
 
   const [isTrailerModalOpen, setIsTrailerModalOpen] = useState(false);
   const [activeTrailer, setActiveTrailer] = useState<{ youtubeId: string; title: string }>({
@@ -96,6 +100,12 @@ export default function App() {
     setIsPitchViewerOpen(true);
   };
 
+  const handleOpenSynopsis = (scriptId: string) => {
+    const script = drawerScriptsData.find(s => s.id === scriptId) ?? null;
+    setSynopsisScript(script);
+    setIsSynopsisModalOpen(true);
+  };
+
   const handleRequestScript = (scriptTitle: string) => {
     setContactSubject(scriptTitle);
     handleNavigate('contatti');
@@ -151,6 +161,7 @@ export default function App() {
         {/* 3. Special Feature Section: Progetti nel Cassetto (Trailers & Screenplays) */}
         <DrawerProjectsSection
           onOpenPitchViewer={handleOpenPitchViewer}
+          onOpenSynopsis={handleOpenSynopsis}
           onPlayTrailer={handlePlayTrailer}
           onRequestScript={handleRequestScript}
           isDarkMode={isDarkMode}
@@ -184,6 +195,14 @@ export default function App() {
         isOpen={isPitchViewerOpen}
         onClose={() => setIsPitchViewerOpen(false)}
         script={selectedScript}
+        isDarkMode={isDarkMode}
+      />
+
+      {/* Script Synopsis Modal */}
+      <SynopsisModal
+        isOpen={isSynopsisModalOpen}
+        onClose={() => setIsSynopsisModalOpen(false)}
+        script={synopsisScript}
         isDarkMode={isDarkMode}
       />
 

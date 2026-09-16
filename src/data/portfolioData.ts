@@ -242,11 +242,13 @@ export const drawerScriptsData: DrawerScript[] = [
     year: "2024",
     type: "Lungometraggio",
     category: "Lungometraggio",
-    status: "Nona stesura",
-    genre: ["Comedy Drama"],
+    status: "In cerca di una produzione",
+    genre: ["Comedy-drama"],
     logline: "Seguire ostinatamente le proprie ambizioni o adattarsi alle circostanze?",
-    sinossi: "Seguire ostinatamente le proprie ambizioni o adattarsi alle circostanze? Ortigia Island guida lo spettatore attraverso il progressivo fallimento delle aspirazioni di Alex, un ragazzo che tenta di sfuggire da un destino statico e monotono, le cui ambizioni mutano in un'ostinata ricerca di rivalsa.",
-    pitchImages: ['/pitches/ortigia-island/01.jpg','/pitches/ortigia-island/02.jpg','/pitches/ortigia-island/03.jpg','/pitches/ortigia-island/04.jpg','/pitches/ortigia-island/05.jpg','/pitches/ortigia-island/06.jpg','/pitches/ortigia-island/07.jpg','/pitches/ortigia-island/08.jpg','/pitches/ortigia-island/09.jpg','/pitches/ortigia-island/10.jpg','/pitches/ortigia-island/11.jpg','/pitches/ortigia-island/12.jpg']
+    sinossi: "Alessandro, chiamato Alex “Bella Vita”, è un giovane disoccupato che vive con la madre a Ortigia, un'isola di Siracusa affascinante ma con poche opportunità. Attratto dalla vita notturna sogna di organizzare un grande festival musicale sull'isola, con la speranza di dare vita a un evento unico che attragga ragazzi e turisti. La madre, Carmela, esasperata dal suo comportamento immaturo, rinuncia alla buona uscita del defunto marito per garantirgli un posto in azienda. Tuttavia, Alex non si presenta al colloquio, scatenando così l'ira di Carmela che decide di cacciarlo di casa. Alex si rifugia nell'organizzazione del festival, vedendolo come un'occasione di riscatto personale. Le sfide finanziarie e logistiche, però, mettono a dura prova la sua determinazione. La linea tra ambizione e ossessione diventa sempre più sottile, costringendo Alex a confrontarsi con i suoi demoni interiori per capire cosa conta davvero nella vita.",
+    runtime: "120 minuti",
+    scriptStage: "Stesura Definitiva",
+    coverImage: "/ortigia-island-poster.png"
   },
   {
     id: "luce-blu",

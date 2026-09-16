@@ -35,7 +35,7 @@ export interface DrawerScript {
   year: string;
   type: string;
   category: 'Cortometraggio' | 'Lungometraggio' | 'Serie TV' | 'Animazione' | 'Documentario';
-  status: 'Pronto per la produzione' | 'In sviluppo' | 'Nona stesura' | 'Trattamento completato' | 'Bozza finale' | 'Archiviato';
+  status: 'Pronto per la produzione' | 'In sviluppo' | 'Nona stesura' | 'Trattamento completato' | 'Bozza finale' | 'Archiviato' | 'In cerca di una produzione';
   coAuthor?: string;
   awards?: string;
   logline: string;
@@ -44,6 +44,9 @@ export interface DrawerScript {
   pages?: number;
   pitchImages?: string[];
   trailerId?: string;
+  coverImage?: string;
+  runtime?: string;
+  scriptStage?: string;
 }
 
 export interface GalleryPhoto {
