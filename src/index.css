@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-paper: #E6DFD5;
+    --bg-paper-subtle: #DCD4C8;
+    --accent-red: #C81D11;
+    --accent-red-hover: #A8170D;
+    --text-ink: #181715;
+    --text-ink-muted: #5C564E;
+    --border-ink: rgba(24, 23, 21, 0.15);
+  }
+}
+
+.font-poster {
+  font-family: 'Big Shoulders Display', 'Bebas Neue', Impact, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.font-bebas {
+  font-family: 'Bebas Neue', 'Big Shoulders Display', sans-serif;
+}
+
+.font-serif {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-script {
+  font-family: 'Courier Prime', Courier, monospace;
+}
+
+.font-sans {
+  font-family: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Custom clean scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E6DFD5;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #141312;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C81D11;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A8170D;
+}
+
+/* Hero entrance: one authored moment, not repeated per section */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-hero-rise {
+  animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-hero-rise-delayed {
+  animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-rise,
+  .animate-hero-rise-delayed {
+    animation: none;
+  }
+}
+

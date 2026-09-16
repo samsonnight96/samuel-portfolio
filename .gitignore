@@ -1,0 +1,16 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+graphify-out/
+
+# Local AI coding tool config, not part of the site
+.agents/
+.claude/
+.codex/
+.impeccable/
+skills-lock.json

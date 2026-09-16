@@ -1,0 +1,6 @@
+{
+  "name": "Samuel Ferla — Portfolio Regista e Sceneggiatore",
+  "description": "Portfolio cinematografico elegante ed editoriale di Samuel Ferla: regia, sceneggiature, docufilm e la sezione speciale Progetti nel cassetto con trailer e copioni.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
