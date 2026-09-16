@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Mail, Send, CheckCircle2, ExternalLink, MapPin } from 'lucide-react';
+import { Mail, Send, CheckCircle2, AlertCircle, ExternalLink, MapPin } from 'lucide-react';
 import { portfolioInfo } from '../data/portfolioData';
+
+const WEB3FORMS_ACCESS_KEY = '83b9205b-fe7e-443f-8a5c-2216d2eaa816';
 
 interface ContactSectionProps {
   prefilledSubject?: string;
@@ -12,7 +14,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledSubject
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState(prefilledSubject || 'Richiesta di Collaborazione / Sceneggiatura');
   const [message, setMessage] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   React.useEffect(() => {
     if (prefilledSubject) {
@@ -20,11 +22,34 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledSubject
     }
   }, [prefilledSubject]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const mailtoUrl = `mailto:${portfolioInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMessaggio:\n${message}`)}`;
-    window.location.href = mailtoUrl;
-    setSubmitted(true);
+    if (new FormData(e.currentTarget).get('botcheck')) return;
+    setStatus('submitting');
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name,
+          email,
+          subject,
+          message,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus('success');
+        setName('');
+        setEmail('');
+        setMessage('');
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -128,14 +153,22 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledSubject
                 Compila il form per richiedere il trattamento di una sceneggiatura o avviare un dialogo di produzione.
               </p>
 
-              {submitted && (
+              {status === 'success' && (
                 <div className="mb-6 p-4 border border-[#C81D11] bg-[#C81D11]/10 flex items-center gap-3 text-xs">
-                  <CheckCircle2 className="w-4 h-4 text-[#C81D11]" />
-                  <span>Client di posta aperto con successo con la tua richiesta preimpostata.</span>
+                  <CheckCircle2 className="w-4 h-4 text-[#C81D11] flex-shrink-0" />
+                  <span>Richiesta inviata con successo. Ti risponderò al più presto.</span>
+                </div>
+              )}
+
+              {status === 'error' && (
+                <div className="mb-6 p-4 border border-[#C81D11] bg-[#C81D11]/10 flex items-center gap-3 text-xs">
+                  <AlertCircle className="w-4 h-4 text-[#C81D11] flex-shrink-0" />
+                  <span>Invio non riuscito. Riprova, oppure scrivi direttamente a {portfolioInfo.email}.</span>
                 </div>
               )}
 
               <form onSubmit={handleSubmit} className="space-y-4">
+                <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[9px] font-mono uppercase tracking-widest mb-1.5 opacity-70">
@@ -211,10 +244,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledSubject
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 bg-[#C81D11] hover:bg-[#A8170D] text-white text-[10px] uppercase font-mono tracking-widest font-bold flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer"
+                  disabled={status === 'submitting'}
+                  className="w-full py-3.5 bg-[#C81D11] hover:bg-[#A8170D] disabled:opacity-60 disabled:cursor-not-allowed text-white text-[10px] uppercase font-mono tracking-widest font-bold flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>Invia Richiesta Diretta</span>
+                  <span>{status === 'submitting' ? 'Invio in corso…' : 'Invia Richiesta Diretta'}</span>
                 </button>
               </form>
             </div>
